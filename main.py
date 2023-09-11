@@ -9,7 +9,7 @@ def data_filter(df):
 
 
 if __name__ == "__main__":
-    dataframe = pd.read_csv("./grades.csv")
+    dataframe = pd.read_csv("./data.csv")
     print(data_filter(dataframe))
     plt.scatter(dataframe["Last name"], dataframe[" \"Test3\""])
     plt.savefig("data_visualization.png")
