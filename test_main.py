@@ -3,16 +3,16 @@ Test goes here
 
 """
 
-from main import data_filter
+from main import func
 import pandas as pd
 
 
-def test_data_filter():
-    dataframe = pd.read_csv("./data.csv")
-    res = data_filter(dataframe)
+def test_func():
+    data = pd.read_csv("./data.csv")
+    res = func(data)
     assert(len(res) == 0)
 
 
 if __name__ == "__main__":
-    test_data_filter()
-    print("All tests passed.")
+    test_func()
+    print("CI passed.")

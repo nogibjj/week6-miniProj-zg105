@@ -4,15 +4,15 @@ main function here
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def data_filter(df):
-    return df[df[" \"Final\""] >= 100]
+def func(df):
+    return df[df[" \"Score\""] > 100]
 
 if __name__ == "__main__":
-    dataframe = pd.read_csv("./data.csv")
+    data = pd.read_csv("./data.csv")
     # analyze
-    target = dataframe[" \"Final\""]
+    target = data[" \"Score\""]
     print("Mean: ", target.mean())
     print("Median: ", target.median())
     print("Standard Deviation: ", target.std())
-    plt.scatter(dataframe["name"], dataframe[" \"Final\""])
+    plt.scatter(data["name"], data[" \"Score\""])
     plt.savefig("visualization.png")
