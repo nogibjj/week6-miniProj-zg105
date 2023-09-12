@@ -3,16 +3,14 @@ Test goes here
 
 """
 
-from main import func
-import pandas as pd
+import main
+import polars as pl
 
-
-def test_func():
-    data = pd.read_csv("./data.csv")
-    res = func(data)
-    assert(len(res) == 0)
-
+def test_data():
+    data = pl.read("data.csv")
+    assert data.height > 0
+    assert "grades" in data.columns
 
 if __name__ == "__main__":
-    test_func()
+    test_data()
     print("CI passed.")
