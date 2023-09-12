@@ -15,24 +15,20 @@ def plot_distribution(data):
     plt.savefig(f"grades_distribution.png")
     plt.show()
 
-def get_descriptive_statistics(data):
-    stats = {}
-    for col in data.columns:
-        if data[col].dtype != pl.Object:
-            col_stats = {
-                "mean": data[col].mean(),
-                "median": data[col].median(),
-                "std": data[col].std()
-            }
-            # Only include columns with at least one non-None value
-            if any(value is not None for value in col_stats.values()):
-                stats[col] = col_stats
-    return stats
+def analyze(data):
+    res = {}
+    col_stats = {
+        "mean": data["grades"].mean(),
+        "median": data["grades"].median(),
+        "std": data["grades"].std()
+    }
+    res["grades"] = col_stats
+    return res
 
 if __name__ == "__main__":
     data = pl.read_csv("data.csv")
-    stats = get_descriptive_statistics(data)
-    for col, values in stats.items():
+    res = analyze(data)
+    for col, values in res.items():
         print(f"Statistics for {col}:")
         for stat, value in values.items():
             print(f"{stat}: {value}")
