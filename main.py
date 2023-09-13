@@ -5,33 +5,29 @@ import polars as pl
 import matplotlib.pyplot as plt
 
 def plot_distribution(data):
-    plt.figure(figsize=(10, 6))
-    plt.hist(data["grades"].to_numpy(), bins=10, edgecolor="k", alpha=0.7)
-    plt.title(f"Distribution of grades")
-    plt.xlabel("grades)
-    plt.ylabel("Frequency")
-    plt.grid(True)
-    plt.tight_layout()
+    plt.hist(data[::,1].to_numpy(), edgecolor="k")
+    plt.title("Distribution of grades")
+    plt.xlabel("grades")
+    plt.ylabel("Count")
     plt.savefig(f"grades_distribution.png")
-    plt.show()
 
-def analyze(data):
+def analyze(input):
     res = {}
-    col_stats = {
-        "mean": data["grades"].mean(),
-        "median": data["grades"].median(),
-        "std": data["grades"].std()
+    stats = {
+        "mean": input[::,1].mean(),
+        "median": input[::,1].median(),
+        "std": input[::,1].std()
     }
-    res["grades"] = col_stats
+    res["grades"] = stats
     return res
 
 if __name__ == "__main__":
-    data = pl.read_csv("data.csv")
-    res = analyze(data)
+    df = pl.read_csv("data.csv")
+    res = analyze(df)
     for col, values in res.items():
         print(f"Statistics for {col}:")
         for stat, value in values.items():
             print(f"{stat}: {value}")
         print("\n")
 
-    plot_distribution(data)
+    plot_distribution(df)
