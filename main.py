@@ -1,33 +1,26 @@
-'''
-main function here
-'''
-import polars as pl
-import matplotlib.pyplot as plt
-
-def plot_distribution(data):
-    plt.hist(data[::,1].to_numpy(), edgecolor="k")
-    plt.title("Distribution of grades")
-    plt.xlabel("grades")
-    plt.ylabel("Count")
-    plt.savefig(f"grades_distribution.png")
-
-def analyze(input):
-    res = {}
-    stats = {
-        "mean": input[::,1].mean(),
-        "median": input[::,1].median(),
-        "std": input[::,1].std()
-    }
-    res["grades"] = stats
-    return res
+import sqlite3
 
 if __name__ == "__main__":
-    df = pl.read_csv("data.csv")
-    res = analyze(df)
-    for col, values in res.items():
-        print(f"Statistics for {col}:")
-        for stat, value in values.items():
-            print(f"{stat}: {value}")
-        print("\n")
-
-    plot_distribution(df)
+    conn = sqlite3.connect('mydatabase.db')
+    cursor = conn.cursor()
+    # Create a table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY,
+            username TEXT NOT NULL,
+        )
+    ''')
+    
+    cursor.execute('INSERT INTO users (username) VALUES ('zg105'))
+    cursor.execute('INSERT INTO users (username) VALUES ('yl794'))
+    
+    conn.commit()
+    
+    cursor.execute('SELECT username FROM users')
+    users = cursor.fetchall()
+    
+    for user in users:
+        print(user)
+    
+    # Close the connection
+    conn.close()
