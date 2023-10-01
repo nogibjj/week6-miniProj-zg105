@@ -1,6 +1,6 @@
 [![CI](https://github.com/Jason-Guo1999/IDS706-Python-Template/actions/workflows/main.yml/badge.svg)](https://github.com/Jason-Guo1999/IDS706-Python-Template/actions/workflows/main.yml)
 # IDS706-Week5-MiniProj
-
+This project uses sqlite3 library to interact with a SQL database. The project also uses pytest library to test the functions in the python script.
 - ``workflows`` is for github actions, enables automated CI/CD for the project
 
 - ``Makefile`` lists make instruments
