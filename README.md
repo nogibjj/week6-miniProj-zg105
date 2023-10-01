@@ -10,3 +10,10 @@
 - ``main.py`` connect to sqltie3 database. Create a new table of users, then add two new users, perform inquiry. 
 
 - ``test_main.py`` test if I have inserted two users.
+
+## CRUD operations
+
+- ``Create``:
+- ``Read``:
+- ``Update``:    
+- ``Delete``:    cursor.execute('DELETE from users where username = zg105')
