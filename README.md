@@ -13,7 +13,7 @@
 
 ## CRUD operations
 
-- ``Create``:
+- ``Create``:    cursor.execute('''CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY,username TEXT NOT NULL,)''')
 - ``Read``:      cursor.execute('SELECT username FROM users')
 - ``Update``:    cursor.execute('INSERT INTO users (username) VALUES ('zg105'))
 - ``Delete``:    cursor.execute('DELETE from users where username = zg105')
