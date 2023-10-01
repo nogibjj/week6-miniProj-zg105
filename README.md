@@ -14,6 +14,6 @@
 ## CRUD operations
 
 - ``Create``:
-- ``Read``:
+- ``Read``:      cursor.execute('SELECT username FROM users')
 - ``Update``:    cursor.execute('INSERT INTO users (username) VALUES ('zg105'))
 - ``Delete``:    cursor.execute('DELETE from users where username = zg105')
