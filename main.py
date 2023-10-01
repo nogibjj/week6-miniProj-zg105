@@ -10,13 +10,18 @@ if __name__ == "__main__":
             username TEXT NOT NULL,
         )
     ''')
-    
+
+    # Update
     cursor.execute('INSERT INTO users (username) VALUES ('zg105'))
     cursor.execute('INSERT INTO users (username) VALUES ('yl794'))
     
     conn.commit()
-    
+
+    # Read
     cursor.execute('SELECT username FROM users')
+
+    # Delete
+    cursor.execute('DELETE from users where username = zg105')
     users = cursor.fetchall()
     
     for user in users:
