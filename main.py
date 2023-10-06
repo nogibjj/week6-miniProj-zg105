@@ -1,32 +1,28 @@
 import sqlite3
+import csv
 
 if __name__ == "__main__":
-    conn = sqlite3.connect("mydatabase.db")
+    conn = sqlite3.connect("Chinook_Sqlite.sqlite")
     cursor = conn.cursor()
-    # Create a table
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY,
-            username TEXT NOT NULL
-        )
-    """)
-
-
-    # Update
-    cursor.execute("INSERT INTO users (username) VALUES ('zg105')")
-    cursor.execute("INSERT INTO users (username) VALUES ('yl794')")
     
-    conn.commit()
-
-    # Delete
-    cursor.execute("DELETE from users where username = 'zg105'")
-
-    # Read
-    cursor.execute("SELECT username FROM users")
-    users = cursor.fetchall()
+    with open("complex_query.sql", 'r', encoding="utf-8") as f:
+        sql_content = f.read()
+    cursor.execute(sql_content)
+    results = cursor.fetchall()
     
-    for user in users:
-        print(user)
-    
-    # Close the connection
+    for row in results:
+        print(row)
+
+    with open("query_results.csv", 'w', newline='', encoding="utf-8") as file:
+        writer = csv.writer(file)
+        
+        # Write header
+        columns = [desc[0] for desc in cursor.description]
+        writer.writerow(columns)
+        
+        # Write data
+        writer.writerows(results)
+        
+    # Close the connection   
+    cursor.close()
     conn.close()
